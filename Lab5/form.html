@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Details Form</title>
+  <script src="form.js"></script>
+
+  <style>
+    body {
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 50px;
+    }
+    form {
+      width: 800px; 
+      padding: 50px;
+      border: 10px solid #8ae9aa;
+      border-radius: 10px;
+      background-color: #d9f3da;
+    }
+    input {
+      background-color: #f3fcf3; 
+      color:black; 
+      padding: 5px;
+      border-radius: 5px;    
+    }  
+    .inp{
+      background-color: #9cf39c; 
+      color:black; 
+      padding: 10px;
+      border: 1px solid;
+      border-radius: 5px;
+    }
+
+   
+  </style>
+    
+</head>
+<body>
+
+  <form onsubmit="return validateForm()">
+   <center> <h1 style="font-size: 50px;">STUDENT DETAILS </h1></center>
+    <fieldset>
+        <legend>Personal Information</legend>
+   Name: <input type="text" id="name" maxlength="20" required><br><br>
+    Age: <input type="number" id="age" required><br><br>
+    City: <input type="text" id="city"  required><br><br>
+    Email: <input type="email" id="email" required><br><br>
+    Phone number <input type="text" id ="ph no" required>
+    </fieldset>
+<br><br>
+    <fieldset>
+    <legend> Hostel Information</legend>
+    Hostel Preference:<br>
+    <input type="radio" name="hostel" value="single"> Single<br>
+    <input type="radio" name="hostel" value="twin"> Twin<br>
+    <input type="radio" name="hostel" value="shared"> Shared
+    <br><br>
+    Food Preference:
+    <select id="foodPreference">
+      <option value="veg">VEG</option>
+      <option value="nonveg">NON-VEG</option>
+    </select><br><br>
+    Laundry Preference:<br>
+        <input type="radio" id="payment1" name="payment" value="yes">YES
+        <input type="radio" id="payment2" name="payment" value="No">NO<br>
+</fieldset>
+   <br><br>
+   <fieldset>
+    <legend>Attachments</legend>
+    Upload Photo: <input type="file" id="photo" required><br><br>
+    Upload aadhar card : <input type="file" id="photo" required><br><br>
+</fieldset>
+<br> <input class="inp" type="submit" value="Submit">
+</form>
+</body>
+</html>
