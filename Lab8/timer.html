@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Timerr</title>
+  <style>
+    body {
+      background-color: black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      color: rgb(244, 238, 209);
+      font-family: Arial, sans-serif;
+    }
+    
+    .adjust-time {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+      padding: 20px 20px;
+    }
+    
+    #timerDisplay {
+      font-size: 15rem;
+      font-weight: bold;
+      text-align: center;
+    }
+    
+    .buttons {
+        font-size: 2rem;
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      size: 20px;
+    }
+    .myButton:hover {
+        background: rgb(255, 204, 0); }
+    .myButton:active {
+        background: rgb(255, 204, 0); }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    
+    button {
+        font-size: 16px; line-height: 16px; padding: 6px; border-radius: 10px; font-family: Georgia, serif; 
+        font-weight: normal; text-decoration: none; font-style: normal; font-variant: normal; text-transform: none;
+         background-image: linear-gradient(to right, rgb(164, 135, 20) 0%, rgb(255, 204, 0) 50%,rgb(147, 128, 53) 100%);
+         box-shadow: rgb(66, 30, 0) 5px 5px 15px 5px; border: 2px solid rgb(195, 159, 14); display: inline-block;
+
+      background-color: rgb(255, 204, 0);
+      border: none;
+      border-radius: 20px;
+      padding: 10px 20px;
+      margin: 0 10px;
+      cursor: pointer;
+      size: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="timerDisplay">00:00:00</div>
+  <div class="buttons">
+    <button id="startButton">Start</button>
+    <button id="pauseButton" style="display: none;">Pause</button>
+    <button id="resumeButton" style="display: none;">Resume</button>
+    <button id="resetButton">Reset</button>
+  </div>
+  <div class="adjust-time">
+    <button id="decreaseTime">-</button>
+    <button id="increaseTime">+</button>
+  </div>
+
+  <audio id="timerSound" src="film-countdown-88717.mp3"></audio>
+
+  <script>
+    let timer;
+    let remainingTime;
+    let duration = 0;
+    let isTimerRunning = false;
+
+    function startTimer() {
+      clearInterval(timer);
+      timer = setInterval(updateTimer, 1000);
+      isTimerRunning = true;
+    }
+
+    function updateTimer() {
+      if (remainingTime > 0) {
+        remainingTime--;
+        displayTime(remainingTime);
+      } else {
+        clearInterval(timer);
+        displayTime(0);
+      }
+    }
+
+    function displayTime(time) {
+      const hours = Math.floor(time / 3600);
+      const minutes = Math.floor((time % 3600) / 60);
+      const seconds = time % 60;
+
+      const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      document.getElementById('timerDisplay').innerText = formattedTime;
+    }
+
+    document.getElementById('startButton').addEventListener('click', () => {
+      if (!isTimerRunning) {
+        duration = parseInt(prompt('Enter duration in minutes:'), 10) * 60;
+        if (!isNaN(duration) && duration > 0) {
+          remainingTime = duration;
+          displayTime(remainingTime);
+          startTimer();
+          document.getElementById('startButton').style.display = 'none';
+          document.getElementById('pauseButton').style.display = 'inline-block';
+          document.getElementById('resetButton').style.display = 'inline-block';
+        } else {
+          alert('Please enter a valid duration.');
+        }
+      }
+    });
+
+    document.getElementById('pauseButton').addEventListener('click', () => {
+      clearInterval(timer);
+      isTimerRunning = false;
+      document.getElementById('pauseButton').style.display = 'none';
+      document.getElementById('resumeButton').style.display = 'inline-block';
+    });
+
+    document.getElementById('resumeButton').addEventListener('click', () => {
+      startTimer();
+      document.getElementById('pauseButton').style.display = 'inline-block';
+      document.getElementById('resumeButton').style.display = 'none';
+    });
+
+    document.getElementById('resetButton').addEventListener('click', () => {
+      clearInterval(timer);
+      isTimerRunning = false;
+      remainingTime = duration;
+      displayTime(remainingTime);
+      document.getElementById('pauseButton').style.display = 'none';
+      document.getElementById('resumeButton').style.display = 'none';
+      document.getElementById('startButton').style.display = 'inline-block';
+    });
+
+    document.getElementById('decreaseTime').addEventListener('click', () => {
+      duration -= 60;
+      if (duration < 0) {
+        duration = 0;
+      }
+      remainingTime = duration;
+      displayTime(remainingTime);
+    });
+
+    document.getElementById('increaseTime').addEventListener('click', () => {
+      duration += 60;
+      remainingTime = duration;
+      displayTime(remainingTime);
+    });
+    // Function to play the timer sound
+    function playTimerSound() {
+      const audio = document.getElementById('timerSound');
+      audio.play();
+    }
+  </script>
+</body>
+</html>
