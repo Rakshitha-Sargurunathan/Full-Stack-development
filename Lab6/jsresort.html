@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Session Room Manager</title>
+  <link rel="stylesheet" href="resort_style.css">
+
+  <script>
+    let boysCount = 0;
+let girlsCount = 0;
+
+function countMale() {
+  boysCount++;
+  updateCounts();
+}
+
+function countFemale() {
+  girlsCount++;
+  updateCounts();
+}
+
+function updateCounts() {
+  const totalCount = boysCount + girlsCount;
+  document.getElementById('boysCount').innerText = boysCount;
+  document.getElementById('girlsCount').innerText = girlsCount;
+  document.getElementById('totalCount').innerText = totalCount;
+}
+
+  </script>
+
+</head>
+<body>
+  <div class="session-room">
+    <h1>COUNTRY YARD RESORT</h1>
+    <div class="counters">
+      <div class="counter">
+        <h2>Boys Entered</h2>
+        <p id="boysCount">0</p>
+      </div>
+      <div class="counter">
+        <h2>Girls Entered</h2>
+        <p id="girlsCount">0</p>
+      </div>
+      <div class="counter">
+        <h2>Total People Entered</h2>
+        <p id="totalCount">0</p>
+      </div>
+    </div>
+    <div class="buttons">
+      <button class="blue-btn" onclick="countMale()" style="font-size: 20px;">Male Entered</button>
+      <button class="pink-btn" onclick="countFemale()" style="font-size: 20px;">Female Entered</button>
+    </div>
+  </div>
+</body>
+</html>

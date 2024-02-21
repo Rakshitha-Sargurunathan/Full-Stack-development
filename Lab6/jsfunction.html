@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Greeting and Circle Area</title>
+
+  <style>
+    body{
+  background-color: antiquewhite;
+  margin: 50px;
+  justify-content: center; 
+  align-items: center;
+}
+
+  </style>
+
+  <script>
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+function showGreeting() {
+  const name = document.getElementById('nameInput').value;
+  const greeting = greet(name);
+  document.getElementById('greeting').innerText = greeting;
+}
+
+function calculateArea(radius) {
+  const pi = 3.14;
+  const radiusInput = document.getElementById('radiusInput').value;
+  const area = pi * radiusInput * radiusInput;
+  document.getElementById('areaResult').innerText = `The area of the circle is: ${area}`;
+}
+
+  </script>
+</head>
+<body>
+    <center>
+  <h1>Greeting Function</h1>
+  <div>
+    <label for="nameInput">Enter your name:</label>
+    <input type="text" id="nameInput"><br><br>
+    <button onclick="showGreeting()">Greet</button>
+    <p id="greeting"></p>
+    
+  </div>
+
+  <br><br><br><h1>Circle Area Calculation</h1>
+  <div>
+    <label for="radiusInput">Enter the radius of the circle:</label>
+    <input type="number" id="radiusInput"><br><br>
+    <button onclick="calculateArea()">Calculate Area</button>
+    <p id="areaResult"></p>
+  </div></center>
+</body>
+</html>
